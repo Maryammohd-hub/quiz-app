@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'question.dart'
 
 void main() {
   runApp(const MyApp());
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.grey.shade900,
         body: SafeArea(
@@ -31,6 +33,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -42,8 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Center(
-              child: Text(
-                'This is where the question text will go.',
+              child: Text(,
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25.0, color: Colors.white),
               ),
@@ -55,12 +58,12 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: EdgeInsets.all(15.0),
             child: TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: Colors.green, // Button background color
-                foregroundColor: Colors.white, // Text (and ripple) color
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
                 padding: const EdgeInsets.all(16.0),
               ),
               onPressed: () {
-                // The user picked true.
+                
               },
               child: const Text('True', style: TextStyle(fontSize: 20.0)),
             ),
@@ -71,16 +74,20 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: EdgeInsets.all(15.0),
             child: TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: Colors.red, // Button background color
-                foregroundColor: Colors.white, // Text (and ripple) color
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
                 padding: const EdgeInsets.all(16.0),
               ),
               onPressed: () {
-                // The user picked true.
+                
               },
               child: const Text('false', style: TextStyle(fontSize: 20.0)),
             ),
           ),
+        ),
+        Row(children: [
+            
+          ],
         ),
       ],
     );

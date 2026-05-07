@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'quiz.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 QuizBrain quizBrain = QuizBrain();
 
@@ -35,6 +36,33 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Icon> scoreKeeper = [];
+
+  void checkAnswer(bool pickedAnswer) {
+    bool correctAnswer = quizBrain.getCorrectAnswer();
+
+    setState(() {
+      if (quizBrain.isFinished() == true) {
+        Alert(
+          context: context,
+          title: 'Finished!',
+          desc: 'You\'ve reached the end of the quiz.',
+        ).show();
+
+        quizBrain.reset();
+
+        scoreKeeper = [];
+      } else {
+        if (pickedAnswer == correctAnswer) {
+          scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+        } else {
+          scoreKeeper.add(Icon(Icons.close, color: Colors.red));
+        }
+        quizBrain.nextQuestion();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -63,7 +91,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.all(16.0),
               ),
-              onPressed: () {},
+              onPressed: () {
+                checkAnswer(true);
+              },
               child: const Text('True', style: TextStyle(fontSize: 20.0)),
             ),
           ),
@@ -77,15 +107,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.all(16.0),
               ),
-              onPressed: () {},
+              onPressed: () {
+                checkAnswer(false);
+              },
               child: const Text('false', style: TextStyle(fontSize: 20.0)),
             ),
           ),
         ),
-        Row(children: [
-            
-          ],
-        ),
+        Row(children: scoreKeeper),
       ],
     );
   }

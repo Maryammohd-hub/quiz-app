@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'question.dart';
 import 'quiz.dart';
 
 QuizBrain quizBrain = QuizBrain();
@@ -36,8 +35,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -49,7 +46,8 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Center(
-              child: Text(,
+              child: Text(
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25.0, color: Colors.white),
               ),
@@ -65,9 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.all(16.0),
               ),
-              onPressed: () {
-                
-              },
+              onPressed: () {},
               child: const Text('True', style: TextStyle(fontSize: 20.0)),
             ),
           ),
@@ -81,9 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 foregroundColor: Colors.white,
                 padding: const EdgeInsets.all(16.0),
               ),
-              onPressed: () {
-                
-              },
+              onPressed: () {},
               child: const Text('false', style: TextStyle(fontSize: 20.0)),
             ),
           ),

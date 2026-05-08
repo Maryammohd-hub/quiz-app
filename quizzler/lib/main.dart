@@ -15,12 +15,48 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: Colors.blueAccent,
+        textTheme: const TextTheme(
+          bodyMedium: TextStyle(color: Colors.black87, fontSize: 18),
+          titleLarge: TextStyle(
+            color: Colors.black,
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            textStyle: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+      ),
       home: Scaffold(
-        backgroundColor: Colors.grey.shade900,
-        body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: MyHomePage(),
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                Color(0xFFFAF3E0), // warm cream
+                Color(0xFFE3F2FD), // pastel blue
+                Color(0xFFFCE4EC), // gentle pink
+              ],
+            ),
+          ),
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.0),
+              child: MyHomePage(),
+            ),
           ),
         ),
       ),
@@ -74,10 +110,22 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Padding(
             padding: EdgeInsets.all(10.0),
             child: Center(
-              child: Text(
-                quizBrain.getQuestionText(),
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 25.0, color: Colors.white),
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 500),
+                transitionBuilder: (Widget child, Animation<double> animation) {
+                  return FadeTransition(opacity: animation, child: child);
+                },
+                child: Text(
+                  quizBrain.getQuestionText(),
+                  key: ValueKey<String>(quizBrain.getQuestionText()),
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 26.0,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.2,
+                    color: Colors.black87,
+                  ),
+                ),
               ),
             ),
           ),
@@ -87,14 +135,25 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: EdgeInsets.all(15.0),
             child: TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.green.shade400,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.all(16.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                shadowColor: Colors.greenAccent,
+                elevation: 5,
               ),
               onPressed: () {
                 checkAnswer(true);
               },
-              child: const Text('True', style: TextStyle(fontSize: 20.0)),
+              child: const Text(
+                'True',
+                style: TextStyle(
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.1,
+                ),
+              ),
             ),
           ),
         ),
@@ -103,14 +162,25 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: EdgeInsets.all(15.0),
             child: TextButton(
               style: TextButton.styleFrom(
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.red.shade400,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.all(16.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                shadowColor: Colors.redAccent,
+                elevation: 5,
               ),
               onPressed: () {
                 checkAnswer(false);
               },
-              child: const Text('false', style: TextStyle(fontSize: 20.0)),
+              child: const Text(
+                'false',
+                style: TextStyle(
+                  fontSize: 22.0,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.1,
+                ),
+              ),
             ),
           ),
         ),
